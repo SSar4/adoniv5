@@ -20,9 +20,10 @@ export default class GamesJogadors extends BaseSchema {
       references('id').inTable('jogos').
       onDelete('CASCADE').
       onUpdate('CASCADE')
-      table.unique(['id_jogofk', 'id_jogadorfk'])
+      table.unique(['id', 'id_jogadorfk'])
 
 
+      table.string('numeros_sorte').notNullable()
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

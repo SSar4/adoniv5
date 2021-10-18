@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Jogo from 'App/Models/Jogo'
 import JogoValidator from 'App/Validators/JogoValidator'
-import Database from '@ioc:Adonis/Lucid/Database'
+import Admin from 'App/Models/Admin'
 
 export default class JogosController {
     public async store({ request, response }: HttpContextContract) {
@@ -38,9 +38,9 @@ export default class JogosController {
     }
 
     public async indexAdmin({ response, params }: HttpContextContract) {
-        response.status(200).json(await Database
-            .from('jogos')
-            .join('admins', 'admins.id_admin', '=', 'jogos.id_adminfk')
-            .select('*').where('id_adminfk',params.id))
+
+        const admin = await Admin.query().preload('jogo').where('id_admin', params.id)
+
+        response.status(200).json(admin)
     }
 }

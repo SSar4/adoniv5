@@ -49,7 +49,7 @@ export default class Usuario extends BaseModel {
   @belongsTo(() => Admin)
   public admin: BelongsTo<typeof Admin>
 
-  @belongsTo(() => Jogador)
+  @belongsTo(() => Jogador,{foreignKey:'id'})
   public jogador: BelongsTo<typeof Jogador>
 
 }

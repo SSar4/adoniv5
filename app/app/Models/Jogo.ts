@@ -48,11 +48,16 @@ export default class Jogo extends BaseModel {
   @belongsTo(() => Admin)
   public admin: BelongsTo<typeof Admin>
 
-  @manyToMany(() => Jogador,{
+  @manyToMany(() => Jogador, {
+    localKey: 'id',
+    pivotForeignKey: 'id_jogofk',
+    pivotRelatedForeignKey: 'id_jogadorfk',
     pivotTable: 'games_jogadors',
-    pivotTimestamps: {
-      createdAt: 'creation_date',
-      updatedAt: 'updation_date'
+    relatedKey: 'id_jogador',
+    pivotColumns: ['numeros_sorte'],
+    pivotTimestamps:{
+      createdAt: true,
+      updatedAt: true
     }
   })
   public jogador: ManyToMany<typeof Jogador>
